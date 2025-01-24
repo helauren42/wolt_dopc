@@ -37,12 +37,21 @@ class DynamicLocation:
 
         ''' "distance_ranges":[{"min":0,"max":500,"a":0,"b":0.0,"flag":null},{"min":500,"max":1000,"a":100,"b":0.0,"flag":null},
         {"min":1000,"max":1500,"a":200,"b":0.0,"flag":null},{"min":1500,"max":2000,"a":200,"b":1.0,"flag":null},{"min":2000,"max":0,"a":0,"b":0.0,"flag":null}] '''
+        self.distance_ranges: List[Dict[str:int]] = _distance_ranges
+
+        ''' "distance_ranges":[{"min":0,"max":500,"a":0,"b":0.0,"flag":null},{"min":500,"max":1000,"a":100,"b":0.0,"flag":null},
+        {"min":1000,"max":1500,"a":200,"b":0.0,"flag":null},{"min":1500,"max":2000,"a":200,"b":1.0,"flag":null},{"min":2000,"max":0,"a":0,"b":0.0,"flag":null}] '''
 
 class Data:
     def __str__(self):
         ret = "Static data:\n"
+        ret = "Static data:\n"
         ret += f"longitude: {self.static.longitude}\n"
         ret += f"latitude: {self.static.latitude}\n"
+        ret += "Dynamic data:\n"
+        ret += f"order_minimum_no_surcharge: {self.dynamic.order_minimum_no_surcharge}\n"
+        ret += f"base_price: {self.dynamic.base_price}\n"
+        ret += f"distance_ranges: {self.dynamic.distance_ranges}\n"
         ret += "Dynamic data:\n"
         ret += f"order_minimum_no_surcharge: {self.dynamic.order_minimum_no_surcharge}\n"
         ret += f"base_price: {self.dynamic.base_price}\n"

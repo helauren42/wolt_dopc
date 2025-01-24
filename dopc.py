@@ -1,12 +1,16 @@
 # curl http://localhost:8000/api/v1/delivery-order-price?venue_slug=home-assignment-venue-helsinki&cart_value=1000&user_lat=60.17094&user_lon=24.93087
 
 import uvicorn
+import uvicorn
 import requests
 import json
 import sys
 from fastapi import FastAPI, Query, HTTPException
 import logging
+from fastapi import FastAPI, Query, HTTPException
+import logging
 
+# CUSTOM MODULES
 # CUSTOM MODULES
 from data import Data
 
@@ -47,3 +51,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
