@@ -4,7 +4,7 @@ import requests
 import json
 import sys
 
-from order import Data
+from data import Data
 
 def main():
     resp_static: requests.Response = requests.get(url="https://consumer-api.development.dev.woltapi.com/home-assignment-api/v1/venues/home-assignment-venue-berlin/static")

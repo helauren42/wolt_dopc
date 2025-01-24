@@ -1,25 +1,20 @@
-class StaticLocation:
-    def __init__(self, _longitude, _latitude):
-        self.longitude = _longitude
-        self.latitude = _latitude
+class Order:
+    def __init__(self, _total_price, _small_order_surcharge, _cart_value, _fee, _distance):
+        self.total_price: int = _total_price
+        self.small_order_surcharge: int = _small_order_surcharge
+        self.cart_value: int = _cart_value
+        # delivery
+        self.fee = _fee
+        self.distance = _distance
 
-class DynamicLocation:
-    def __init__(self, _minimum_order, _base_price, _distance_ranges):
-        self.minimum_order = _minimum_order
-        self.base_price = _base_price
-        self.distance_ranges = _distance_ranges
-
-class Data:
-    def __str__(self):
-        ret = "Data:\n"
-        ret += f"longitude: {self.static.longitude}\n"
-        ret += f"latitude: {self.static.latitude}\n"
-        return ret
-
-    def __init__(self, _longitude, _latitude):
-        self.static = StaticLocation(_longitude, _latitude)
-
-    # def initDynamic(self, _minimum_order, _base_price, _distance_ranges):
-    #     self.dynamic_loc : DynamicLocation = DynamicLocation
-
-        
+    def getDict(self) -> dict:
+        result = {
+            "total_price": self.total_price,
+            "small_order_surcharge": self.small_order_surcharge,
+            "cart_value": self.cart_value,
+            "delivery": {
+                "fee": self.fee,
+                "distance": self.distance,
+            }
+        }
+        return result
