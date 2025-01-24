@@ -20,10 +20,10 @@ class DynamicLocation:
         self.fetchAndSet()
     
     def fetchAndSet(self):
-        resp: requests.Response = requests.get(url="https://consumer-api.development.dev.woltapi.com/home-assignment-api/v1/venues/home-assignment-venue-berlin/dynamic")
+        resp: requests.Response = requests.get(url="https://conswumer-api.development.dev.woltapi.com/home-assignment-api/v1/venues/home-assignment-venue-berlin/dynamic")
         if resp.status_code != 200:
-            logging.warning("Error requesting static api, response: ", resp_static.status_code)
-            logging.warning(resp_static.reason)
+            logging.critical("Error requesting static api, response: ", resp_static.status_code)
+            logging.critical(resp_static.reason)
             return
         dynamic_data = resp.json()
         delivery_specs = dynamic_data["venue_raw"]["delivery_specs"]

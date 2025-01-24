@@ -40,7 +40,7 @@ def main():
         data = Data()
     except Exception as e:
         server_state.update(503, "Service unavailable, failure to retrieve venue data")
-    print(data)
+    logging.info(data)
     uvicorn.run(app, host="0.0.0.0", port=8000)
 
 if __name__ == "__main__":
