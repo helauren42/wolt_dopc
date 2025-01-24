@@ -17,7 +17,7 @@ data: Data
 logging.basicConfig(
     level=1,
     handlers=[
-        logging.FileHandler("logger"),
+        logging.FileHandler("logger", mode="w"),
         logging.StreamHandler()
     ]
 )
@@ -37,10 +37,12 @@ def main():
     logging.info("app started")
     server_state = ServerState()
     try:
+        logging.info("pre data")
         data = Data()
+        print(data)
     except Exception as e:
+        logging.info(f"Exception thrown: {e}")
         server_state.update(503, "Service unavailable, failure to retrieve venue data")
-    print(data)
     uvicorn.run(app, host="0.0.0.0", port=8000)
 
 if __name__ == "__main__":

@@ -1,12 +1,12 @@
 import time
 import requests
+import logging
 
 class StaticLocation:
     def __init__(self):
         resp_static: requests.Response = requests.get(url="https://consumer-api.development.dev.woltapi.com/home-assignment-api/v1/venues/home-assignment-venue-berlin/static")
         if resp_static.status_code != 200:
-            logging.warning("Error requesting static api, response: ", resp_static.status_code)
-            logging.warning(resp_static.reason)
+            raise Exception(f"Error requesting static api, response: {resp_static.status_code}\n{resp_static.reason}")
         static_data = resp_static.json()
         coordinates = static_data["venue_raw"]["location"]["coordinates"]
         self.set(coordinates[0], coordinates[1])
@@ -20,11 +20,11 @@ class DynamicLocation:
         self.fetchAndSet()
     
     def fetchAndSet(self):
-        resp: requests.Response = requests.get(url="https://consumer-api.development.dev.woltapi.com/home-assignment-api/v1/venues/home-assignment-venue-berlin/dynamic")
+        logging.info("start")
+        resp: requests.Response = requests.get(url="https://conwsumer-api.development.dev.woltapi.com/home-assignment-api/v1/venues/home-assignment-venue-berlin/dynamic")
+        logging.info("status code: ", resp.status_code)
         if resp.status_code != 200:
-            logging.warning("Error requesting static api, response: ", resp_static.status_code)
-            logging.warning(resp_static.reason)
-            return
+            raise Exception(f"Error requesting static api, response: {resp.status_code}\n{resp.reason}")
         dynamic_data = resp.json()
         delivery_specs = dynamic_data["venue_raw"]["delivery_specs"]
         delivery_pricing = delivery_specs["delivery_pricing"]
@@ -60,6 +60,6 @@ class Data:
             return
         self.last_dynamic_init = now
         self.dynamic = DynamicLocation()
-    
+
     # def initDynamic(self, _order_minimum_no_surcharge, _base_price, _distance_ranges):
     #     self.dynamic_loc : DynamicLocation = DynamicLocation
