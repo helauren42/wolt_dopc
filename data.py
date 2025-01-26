@@ -33,7 +33,7 @@ class StaticLocation:
         self.locations[venue_name] = coordinates
 
     async def get_coordinates(self, venue_name: str) -> Dict[str, float]:
-        if self.locations.get(venue_name):
+        if venue_name not in self.locations:
             raise Exception(f"Static Location not found in cache: {venue_name}")
         return self.locations[venue_name]
 
