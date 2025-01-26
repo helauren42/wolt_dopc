@@ -97,7 +97,6 @@ async def get_delivery_order_price(
     try:
         delivery_distance = Order.haversine(user_lon, user_lat, venue_coordinates[0], venue_coordinates[1])
         Order.calculatePrice(customer_input, dynamic_data, delivery_distance)
-        logging.critical(f"Error calculating delivery price: {e}")
     except:
         logging.error(f"The delivery address is too far from the venue{e}")
         raise HTTPException(status_code=422, detail="The delivery address is too far from the venue")
