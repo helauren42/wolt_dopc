@@ -34,6 +34,7 @@ class Order:
         """
         Get the distance between two coordinates.
         """
+        logging.debug(f"lon1: {lon1}, lat1: {lat1}, lon2: {lon2}  lat2: {lat2},")
         lon1, lat1, lon2, lat2 = map(radians, (lon1, lat1, lon2, lat2))
 
         dlon = lon2 - lon1

@@ -3,3 +3,5 @@ logger
 __pycache__
 venv/
 .ropeproject
+logger.log
+tester.py
