@@ -3,6 +3,7 @@ import requests
 import logging
 from typing import  Dict 
 from enum import Enum
+import aiohttp
 
 #CUSTOM MODULES
 from const import STATIC_LOCATIONS, BASE_URL, ORDER_MIN, BASE_PRICE, DISTANCE_RANGES
@@ -46,7 +47,7 @@ class DynamicLocation:
         """
         resp = await DynamicLocation.fetch(venue_name)
             
-        dynamic_data = resp.json()
+        dynamic_data = resp
         delivery_specs = dynamic_data["venue_raw"]["delivery_specs"]
         delivery_pricing = delivery_specs["delivery_pricing"]
         
@@ -57,19 +58,19 @@ class DynamicLocation:
         ''' "distance_ranges":[{"min":0,"max":500,"a":0,"b":0.0,"flag":null},{"min":500,"max":1000,"a":100,"b":0.0,"flag":null},
         {"min":1000,"max":1500,"a":200,"b":0.0,"flag":null},{"min":1500,"max":2000,"a":200,"b":1.0,"flag":null},{"min":2000,"max":0,"a":0,"b":0.0,"flag":null}] '''
         return ret
-            
+
     @staticmethod
     async def fetch(venue_name: str) -> Dict:
         """
         Fetch dynamic data from the Wolt venue API.
         """
-        _url = f"{BASE_URL}/{venue_name}/dynamic"
+        _url = f"{BASE_URL}{venue_name}/dynamic"
         try:
             async with aiohttp.ClientSession() as session:
                 async with session.get(_url) as resp:
                     if resp.status != 200:
                         raise Exception(f"Error requesting dynamic API, response: {resp.status}\n{await resp.text()}")
-                    return await resp.json()
+                    return await resp.json()  # Parse the response as JSON
         except Exception as e:
             raise Exception(f"Failed request to {_url}: {e}")
     
