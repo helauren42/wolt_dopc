@@ -97,7 +97,7 @@ async def get_delivery_order_price(
         logging.info(f"Venue coordinates for {venue_slug}: {venue_coordinates}")
     except Exception as e:
         logging.critical(f"Error fetching coordinates: {e}")
-        raise HTTPException(status_code=500, detail=f"Error fetching venue coordinates: {str(e)}")
+        raise HTTPException(status_code=400, detail=f"Error fetching venue coordinates: {str(e)}")
 
     try:
         logging.debug(f"Fetching dynamic data for venue: {venue_slug}")
@@ -105,7 +105,7 @@ async def get_delivery_order_price(
         logging.info(f"Dynamic venue data for {venue_slug} fetched successfully")
     except Exception as e:
         logging.critical(f"Error fetching dynamic venue data: {e}")
-        raise HTTPException(status_code=500, detail=f"Error fetching venue data: {str(e)}")
+        raise HTTPException(status_code=400, detail=f"Error fetching venue data: {str(e)}")
 
     try:
         logging.debug("Calculating delivery distance using haversine formula")
@@ -118,7 +118,7 @@ async def get_delivery_order_price(
         return result
     except Exception as e:
         logging.error(f"Error calculating delivery price: {e}")
-        raise HTTPException(status_code=422, detail=f"Error calculating delivery price: {str(e)}")
+        raise HTTPException(status_code=400, detail=f"Error calculating delivery price: {str(e)}")
 
 def main():
     logging.info("Starting application")
