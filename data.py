@@ -44,7 +44,7 @@ class DynamicLocation:
         """
         Fetch and parse dynamic data.
         """
-        resp = await self.fetch(venue_name)
+        resp = await DynamicLocation.fetch(venue_name)
             
         dynamic_data = resp.json()
         delivery_specs = dynamic_data["venue_raw"]["delivery_specs"]
