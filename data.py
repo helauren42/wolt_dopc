@@ -73,4 +73,6 @@ class DynamicLocation:
         except Exception as e:
             raise Exception(f"Failed request to {_url}: {e}")
     
+# GLOBAL
+static_data: StaticLocation = StaticLocation()
 

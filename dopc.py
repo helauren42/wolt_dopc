@@ -8,12 +8,11 @@ from fastapi import FastAPI, Query, HTTPException
 import logging
 
 # CUSTOM MODULES
-from data import StaticLocation, DynamicLocation
+from data import static_data, DynamicLocation
 from const import ORDER_MIN, BASE_PRICE, DISTANCE_RANGES
 
 # GLOBALS
 app = FastAPI()
-static_data: StaticLocation
 logging.basicConfig(
     level=1,
     handlers=[
@@ -69,7 +68,7 @@ class Order:
             "small_order_surcharge": small_order_surcharge,
             "cart_value": customer_input.cart_value,
             "delivery": {
-                "fee": fee,
+                "fee": delivery_fee,
                 "distance": delivery_distance,
             }
         }
@@ -102,7 +101,6 @@ async def get_delivery_order_price(
         raise HTTPException(status_code=422, detail="The delivery address is too far from the venue")
 
 def main():
-    static_data = StaticLocation()
     if len(static_data.locations) == 0:
         logger.critical("No static locations found")
     uvicorn.run(app, host="0.0.0.0", port=8000)
