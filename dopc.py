@@ -8,12 +8,12 @@ from fastapi import FastAPI, Query, HTTPException
 import logging
 
 # CUSTOM MODULES
-from data import LocationData
+from data import StaticLocation, DynamicLocation
 from const import ORDER_MIN, BASE_PRICE, DISTANCE_RANGES
 
 # GLOBALS
 app = FastAPI()
-location_data: LocationData
+static_data: StaticLocation
 logging.basicConfig(
     level=1,
     handlers=[
@@ -22,9 +22,11 @@ logging.basicConfig(
     ]
 )
 
+
+
 def main():
     try:
-        location_data = LocationData()
+        static_data = StaticLocation()
     except Exception as e:
         pass
     uvicorn.run(app, host="0.0.0.0", port=8000)

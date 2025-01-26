@@ -39,10 +39,12 @@ class StaticLocation:
         return self.locations[venue_name]
 
 class DynamicLocation:
-    def __init__(self):
-        pass
 
-    async def get(self, venue_name):
+    @staticmethod
+    async def get(venue_name) -> Dict:
+        """
+        Fetch and parse dynamic data.
+        """
         resp = await self.fetch(venue_name)
             
         dynamic_data = resp.json()
@@ -50,14 +52,18 @@ class DynamicLocation:
         delivery_pricing = delivery_specs["delivery_pricing"]
         
         ret: Dict = {}
-        ret[ORDER_MIN] = delivery_specs["order_minimum_no_surcharge"] # int
-        ret[BASE_PRICE] = delivery_pricing["base_price"] # int
-        ret[DISTANCE_RANGES] = delivery_pricing["distance_ranges"]
+        ret[ORDER_MIN] = delivery_specs[ORDER_MIN] # int
+        ret[BASE_PRICE] = delivery_pricing[BASE_PRICE] # int
+        ret[DISTANCE_RANGES] = delivery_pricing[DISTANCE_RANGES]
         ''' "distance_ranges":[{"min":0,"max":500,"a":0,"b":0.0,"flag":null},{"min":500,"max":1000,"a":100,"b":0.0,"flag":null},
         {"min":1000,"max":1500,"a":200,"b":0.0,"flag":null},{"min":1500,"max":2000,"a":200,"b":1.0,"flag":null},{"min":2000,"max":0,"a":0,"b":0.0,"flag":null}] '''
         return ret
             
-    async def fetch(self, venue_name: str) -> Dict:
+    @staticmethod
+    async def fetch(venue_name: str) -> Dict:
+        """
+        Fetch dynamic data from the Wolt venue API.
+        """
         logging.info(f"Fetching dynamic location: {venue_name}")
         _url = f"{BASE_URL}/{venue_name}/dynamic"
         try:
@@ -70,10 +76,4 @@ class DynamicLocation:
         except Exception as e:
             raise Exception(f"Failed request to {_url}: {e}")
     
-class LocationData:
-    def __init__(self):
-        self.static = StaticLocation()
-        self.dynamic = DynamicLocation()
 
-    # def initDynamic(self, _order_minimum_no_surcharge, _base_price, _distance_ranges):
-    #     self.dynamic_loc : DynamicLocation = DynamicLocation

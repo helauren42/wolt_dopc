@@ -13,6 +13,6 @@ STATIC_LOCATIONS = ["https://consumer-api.development.dev.woltapi.com/home-assig
 
 BASE_URL = "https://consumer-api.development.dev.woltapi.com/home-assignment-api/v1/venues/"
 
-ORDER_MIN = 0
-BASE_PRICE = 1
-DISTANCE_RANGES = 2
+ORDER_MIN = "order_minimum_no_surcharge"
+BASE_PRICE = "base_price"
+DISTANCE_RANGES = "distance_ranges"
