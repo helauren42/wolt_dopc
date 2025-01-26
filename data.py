@@ -4,7 +4,6 @@ import logging
 from typing import  Dict 
 from enum import Enum
 
-
 #CUSTOM MODULES
 from const import STATIC_LOCATIONS, BASE_URL, ORDER_MIN, BASE_PRICE, DISTANCE_RANGES
 
@@ -18,14 +17,14 @@ class StaticLocation:
             try:
                 resp_static: requests.Response = requests.get(url=_url)
                 if resp_static.status_code != 200:
-                    logging.critical(f"Error requesting static API at {_url}. Status code: {resp_static.status_code}, Reason: {resp_static.reason}")
+                    logging.error(f"Error requesting static API at {_url}. Status code: {resp_static.status_code}, Reason: {resp_static.reason}")
                     continue
                 venue_name = _url.split("/")[-2]
                 static_data = resp_static.json()
                 coordinates = static_data["venue_raw"]["location"]["coordinates"]
                 self.set(venue_name, coordinates[0], coordinates[1])
             except Exception as e:
-                logging.critical(f"Request failed for {_url}: {e}")
+                logging.error(f"Request failed for {_url}: {e}")
 
     def set(self, venue_name: str, longitude: float, latitude: float):
         if venue_name not in self.locations:
@@ -64,12 +63,10 @@ class DynamicLocation:
         """
         Fetch dynamic data from the Wolt venue API.
         """
-        logging.info(f"Fetching dynamic location: {venue_name}")
         _url = f"{BASE_URL}/{venue_name}/dynamic"
         try:
             async with aiohttp.ClientSession() as session:
                 async with session.get(_url) as resp:
-                    logging.info(f"Dynamic request status code: {resp.status}")
                     if resp.status != 200:
                         raise Exception(f"Error requesting dynamic API, response: {resp.status}\n{await resp.text()}")
                     return await resp.json()
