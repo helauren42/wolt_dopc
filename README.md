@@ -41,26 +41,26 @@ The api will be accessible through your localhost's port 8000
 
 ### API Endpoint
 
-Objective: Calculate Delivery Order Price
-Endpoint: GET "/api/v1/delivery-order-price/"
-Address: localhost:8000
+Objective: Calculate Delivery Order Price<br>
+Endpoint: GET "/api/v1/delivery-order-price/"<br>
+Address: localhost:8000<br>
 
-Parameters:
-venue_slug (str): The unique identifier for the venue.
-cart_value (int): The shopping cart total value.
-user_lat (float): The latitude of the user's location.
-user_lon (float): The longitude of the user's location.
+Parameters:<br>
+venue_slug (str): The unique identifier for the venue.<br>
+cart_value (int): The shopping cart total value.<br>
+user_lat (float): The latitude of the user's location.<br>
+user_lon (float): The longitude of the user's location.<br>
 
-Example Request:
+Example Request:<br>
 curl -X GET "http://0.0.0.0:8000/api/v1/delivery-order-price?venue_slug=home-assignment-venue-helsinki&cart_value=1500&user_lat=60.1699&user_lon=24.9384"
 
-Example Response:
-{
-  "total_price": 1700,
-  "small_order_surcharge": 0,
-  "cart_value": 1500,
-  "delivery": {
-    "fee": 200,
-    "distance": 1200.5
-  }
-}
+Example Response:<br>
+{<br>
+  "total_price": 1700,<br>
+  "small_order_surcharge": 0,<br>
+  "cart_value": 1500,<br>
+  "delivery": {<br>
+    "fee": 200,<br>
+    "distance": 1200.5<br>
+  }<br>
+}<br>
