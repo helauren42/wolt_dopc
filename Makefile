@@ -11,8 +11,8 @@ endif
 # Default target when no target is specified
 help:
 	@echo "Usage:"
-	@echo "  make test    - Run the test script"
-	@echo "  make server  - Start the server"
+	@echo "  make test - Run the test script"
+	@echo "  make server - Start the server"
 
 test:
 	$(PYTHON) ./tester/tester.py > ./tester/output.txt
