@@ -34,8 +34,17 @@ For Windows:
 
 ## Usage
 
-Simply run the application by typing:
-- "python main.py" or "python3 main.py"
+Simply run the dopc application by typing:<br>
+- "python ./srcs/dopc.py" or "python3 ./srcs/dopc.py"
+
+To run the tester make sure the server is already running and then in a separate terminal type:<br>
+- "python ./tester/tester.py" or "python3 ./tester/tester.py"
+
+If you are on linux or mac, or if you have installed make on your windows machine, you can run these commands from the project's root directory:<br>
+To start the server:<br>
+- make server<br>
+To start the tester:<br>
+- make test<br>
 
 The api will be accessible through your localhost's port 8000
 

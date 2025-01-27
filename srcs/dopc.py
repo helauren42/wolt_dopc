@@ -43,11 +43,11 @@ class Order:
         c = 2 * asin(sqrt(a))
         radius_km = 6371
         logging.debug(f"Calculated haversine distance: {c * radius_km} km")
-        return c * radius_km * 1000
+        return c * radius_km
 
     @staticmethod
-    def calculatePrice(customer_input: CustomerInput, dynamic_data: DynamicLocation, delivery_distance: float) -> dict:
-        logging.debug(f"Calculating price for venue: {customer_input.venue_slug}, cart value: {customer_input.cart_value}, distance: {delivery_distance} km")
+    def calculatePrice(customer_input: CustomerInput, dynamic_data: DynamicLocation, delivery_distance: int) -> dict:
+        logging.debug(f"Calculating price for venue: {customer_input.venue_slug}, cart value: {customer_input.cart_value}, distance: {delivery_distance}")
         distance_ranges = dynamic_data[DISTANCE_RANGES]
         order_minimum_no_surcharge = dynamic_data[ORDER_MIN]
         
@@ -113,8 +113,8 @@ async def get_delivery_order_price(
         logging.info(f"Delivery distance: {delivery_distance} km")
         
         logging.debug("Calculating total price")
-        result = Order.calculatePrice(customer_input, dynamic_data, delivery_distance)
-        logging.info(f"Calculated price successfully: {result['total_price']}")
+        result = Order.calculatePrice(customer_input, dynamic_data, round(delivery_distance))
+        logging.info(f"successfully: {result['total_price']}")
         return result
     except Exception as e:
         logging.error(f"Error calculating delivery price: {e}")
@@ -124,7 +124,7 @@ def main():
     logging.info("Starting application")
     if len(static_data.locations) == 0:
         logging.critical("No static locations found")
-        raise Exception("No static locations found")
+        sys.exit("No static locations found")
 
     logging.info("Starting Uvicorn server on 0.0.0.0:8000")
     uvicorn.run(app, host="0.0.0.0", port=8000)

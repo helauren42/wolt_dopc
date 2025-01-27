@@ -4,4 +4,4 @@ __pycache__
 venv/
 .ropeproject
 logger.log
-tester.py
+output.txt
