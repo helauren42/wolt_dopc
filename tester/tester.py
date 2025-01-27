@@ -18,7 +18,6 @@ venue_coordinates = [
     [139.7115264, 35.6459122]                # tokyo
 ]
 
-# cart_values = [0, 500, 700, 1000, 2500]
 cart_values = [100, 500, 700, 1000, 2500]
 
 print(" " * 50 + "Test Delivery impossible")
@@ -28,39 +27,39 @@ cart_value = 10
 user_lat = 10
 user_lon = 10
 
-# for venue_slug in venue_slugs:
+for venue_slug in venue_slugs:
 
-#     """
-#     We run the curl command twice, once to retrive the status code, once to retrieve the response body
-#     """
+    """
+    We run the curl command twice, once to retrive the status code, once to retrieve the response body
+    """
     
-#     print(f"Test for venue: {venue_slug}")
+    print(f"Test for venue: {venue_slug}")
     
 
-#     try:
-#         url = f"http://localhost:8000/api/v1/delivery-order-price?venue_slug={venue_slug}&cart_value={cart_value}&user_lat={user_lat}&user_lon={user_lon}"
+    try:
+        url = f"http://localhost:8000/api/v1/delivery-order-price?venue_slug={venue_slug}&cart_value={cart_value}&user_lat={user_lat}&user_lon={user_lon}"
         
-#         status_command = [
-#             "curl",
-#             "-w", "%{http_code}",
-#             "-o", "/dev/null",
-#             url
-#         ]
-#         result = subprocess.run(status_command, capture_output=True, text=True, check=True)
-#         status_code = result.stdout.strip()  # HTTP status code
-#         print("Status Code:", status_code)
+        status_command = [
+            "curl",
+            "-w", "%{http_code}",
+            "-o", "/dev/null",
+            url
+        ]
+        result = subprocess.run(status_command, capture_output=True, text=True, check=True)
+        status_code = result.stdout.strip()  # HTTP status code
+        print("Status Code:", status_code)
 
-#         # Now get the body of the response
-#         response_command = [
-#             "curl",
-#             url
-#         ]
-#         body_result = subprocess.run(response_command, capture_output=True, text=True, check=True)
-#         print("Response Body:", body_result.stdout)
+        # Now get the body of the response
+        response_command = [
+            "curl",
+            url
+        ]
+        body_result = subprocess.run(response_command, capture_output=True, text=True, check=True)
+        print("Response Body:", body_result.stdout)
 
-#     except subprocess.CalledProcessError as e:
-#         print("Error occurred:", e)
-#     print("-" * 50)
+    except subprocess.CalledProcessError as e:
+        print("Error occurred:", e)
+    print("-" * 50)
 
 print("\n\n")
 
