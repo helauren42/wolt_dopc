@@ -114,8 +114,6 @@ for i in range(len(venue_slugs)):
                 body_result = subprocess.run(response_command, capture_output=True, text=True, check=True)
                 print("Response Body:", body_result.stdout)
                 print("")
-                if status_code != 200:
-                    break;
 
             except subprocess.CalledProcessError as e:
                 print("Error occurred:", e)

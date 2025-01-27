@@ -46,6 +46,8 @@ To start the server:<br>
 To start the tester:<br>
 - make test<br>
 
+Because of rate limiting from the home assignment api, the tester is frequently sleeping, it takes some time, so please be patient.
+
 The api will be accessible through your localhost's port 8000
 
 ### API Endpoint
